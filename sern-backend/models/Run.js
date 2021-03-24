@@ -13,7 +13,7 @@ module.exports = function(sequelize, type) {
             allowNull: false
         },
         runTime: {
-            type: type.DATE,
+            type: type.INTEGER,
             allowNull: false
         },
         breaks: {

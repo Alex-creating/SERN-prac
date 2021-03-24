@@ -1,29 +1,22 @@
 const {connection} = require("../database/db_connection.js");
-const cycle = require("../models/Cycle.js");
+const {Cycle} = require("../database/db_connection.js");
 
 let getAllCycles = async () => {
     const results = await connection.query(
-        "SELECT * FROM cycle"
+        "SELECT * FROM dbo.Cycles"
     );
     return results;
 }
 
 let getCycleById = async (cycleId) => {
     const results = await connection.query(
-        "SELECT * FROM cycle WHERE cycleId=`" + cycleId  + "`"
+        "SELECT * FROM dbo.Cycles WHERE cycleId='" + cycleId  + "'"
     );
     return results;
 }
 
-// let createCycle = async (cycleToCreate) => {
-//     connection.query{
-//         "INSERT INTO cycle ("
-//     }
-
-// }
-
 let createCycle = async (cycleToCreate) => {
-    const cycle = await cycle.create({
+    await Cycle.create({
     cycleDistance: cycleToCreate.cycleDistance,
     cycleTime: cycleToCreate.cycleTime,
     cycleName: cycleToCreate.cycleName
@@ -31,22 +24,21 @@ let createCycle = async (cycleToCreate) => {
 }
 
 let deleteCycle = async (cycleId) => {
-    await cycle.destory({
-        where: {
-            cycleId: cycleId
-        }
-    });
+    await connection.query(
+        "DELETE FROM dbo.Cycles WHERE cycleId='" + cycleId  + "'"
+    );
+    return (console.log("Cycle deleted"));
 }
 
 let updateCycle = async (cycle) => {
-    await cycle.update({    
+    await Cycle.update({    
         cycleDistance: cycle.cycleDistance,
         cycleTime: cycle.cycleTime,
-        cycleName: cycle.cycleName}), {
+        cycleName: cycle.cycleName}, {
         where: {
             cycleId: cycle.cycleId
         }
-    }
+    });
 }
 
 module.exports = {

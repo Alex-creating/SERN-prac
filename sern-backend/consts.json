@@ -1,4 +1,4 @@
 {
-    "dbHost": "gcp database",
-    "dbPort": "gcp port"
+   "dbHost" : "127.0.0.1",
+   "dbPort": "gcp port"
 }

@@ -1,26 +1,34 @@
 const Sequelize = require("sequelize");
-const {dbHost, dbPort} = require("../consts.json");
-const {Run} = require("../models/Run.js");
+const {dbHost} = require("../consts.json");
+const RunModel = require("../models/Run.js");
+const CycleModel = require("../models/Cycle.js");
 
-const connection = new Sequelize("FitnessTrack", "admin", "password", {
-    host: dbHost,
-    port: dbPort,
-    dialect: "mysql",
-    pool: {
-        max: 10,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-      }
+
+const connection = new Sequelize('FitInstance', 'FitUser', 'testpassword', {
+  host: "localhost",
+  dialect: 'mssql',
+  dialectOptions: { options: {instanceName: 'FitInstance' }},
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 });
 
-const Run = Run(connection, Sequelize);
+const Run = RunModel(connection, Sequelize);
+const Cycle = CycleModel(connection, Sequelize);
+
+connection.authenticate()
+.then(() => console.log("database working"))
+.catch(err =>  console.log(err));
 
 connection.sync({ force: true }).then(() => {
   console.log("Database & tables created!");
 });
 
-module.exports = {
+ module.exports = {
   Run,
-  connection};
-
+  Cycle,
+  connection
+};

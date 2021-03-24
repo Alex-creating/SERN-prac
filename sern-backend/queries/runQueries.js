@@ -1,29 +1,22 @@
 const {connection} = require("../database/db_connection.js");
-const run = require("../models/Run.js");
+const {Run} = require("../database/db_connection.js");
 
 let getAllRuns = async () => {
     const results = await connection.query(
-        "SELECT * FROM run"
+        "SELECT * FROM dbo.Runs"
     );
     return results;
 }
 
 let getRunById = async (runId) => {
     const results = await connection.query(
-        "SELECT * FROM run WHERE runId=`" + runId  + "`"
+        "SELECT * FROM dbo.Runs WHERE runId='" + runId  + "'"
     );
     return results;
 }
 
-// let createRun = async (runToCreate) => {
-//     connection.query{
-//         "INSERT INTO run ("
-//     }
-
-// }
-
 let createRun = async (runToCreate) => {
-    const run = await run.create({
+    await Run.create({
     runDistance: runToCreate.runDistance,
     runTime: runToCreate.runTime,
     breaks: runToCreate.breaks,
@@ -32,23 +25,22 @@ let createRun = async (runToCreate) => {
 }
 
 let deleteRun = async (runId) => {
-    await run.destory({
-        where: {
-            runId: runId
-        }
-    });
+    await connection.query(
+        "DELETE FROM dbo.Runs WHERE runId='" + runId  + "'"
+    );
+    return (console.log("Run deleted"));
 }
 
 let updateRun = async (run) => {
-    await run.update({    
+    await Run.update({    
         runDistance: run.runDistance,
         runTime: run.runTime,
         breaks: run.breaks,
-        runName: run.runName}), {
+        runName: run.runName}, {
         where: {
             runId: run.runId
         }
-    }
+    });
 }
 
 module.exports = {
