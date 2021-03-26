@@ -1,0 +1,13 @@
+{
+    "BACKEND_URL" : "http://localhost:8081",
+    "GET_CYCLE_BY_ID" : "/getCycle",
+    "GET_ALL_CYCLE" : "/getAllCycles",
+    "UPDATE_CYCLE" : "/updateCycle",
+    "DELETE_CYCLE" : "/deleteCycle",
+    "CREATE_CYCLE" : "/createCycle",
+    "GET_RUN_BY_ID" : "/getRun",
+    "GET_ALL_RUN" : "/getAllRuns",
+    "UPDATE_RUN" : "/updateRun",
+    "DELETE_RUN" : "/deleteRun",
+    "CREATE_RUN" : "/createRun"
+}
