@@ -49,8 +49,8 @@ export default class Frontpage extends React.Component {
 
     render() {
         return (<div >
-            <RecordCard onChange={this.handleChange} onSubmit={this.submitRun} typeOfExercise="run"></RecordCard>
-            <RecordCard onChange={this.handleChange} onSubmit={this.submitCycle} typeOfExercise="cycle"></RecordCard>
+            <RecordCard onChange={this.handleChange} submiter={this.submitRun} typeOfExercise="run"></RecordCard>
+            <RecordCard onChange={this.handleChange} submiter={this.submitCycle} typeOfExercise="cycle"></RecordCard>
         </div>
         );
     }
