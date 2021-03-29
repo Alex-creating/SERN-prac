@@ -26,31 +26,29 @@ export default class Frontpage extends React.Component {
 
     submitRun = e => {
         e.preventDefault();
-        console.log("hello");
+        console.log(this.state.runName[0]);
         axios.post(`${BACKEND_URL}${CREATE_RUN}`, {
-            runName: this.state.runName,
-            runDistance: this.state.runDistance,
-            runTime: this.state.runTime,
-            breaks: this.state.breaks,
-            difficulty: this.state.difficulty}).then(response => console.log(response));
+            runName: this.state.runName[0],
+            runDistance: this.state.runDistance[0],
+            runTime: this.state.runTime[0],
+            breaks: this.state.breaks[0],
+            difficulty: this.state.difficulty[0]}).then(response => console.log(response));
         }
 
     submitCycle = e => {
         e.preventDefault();
         axios.post(`${BACKEND_URL}${CREATE_CYCLE}`, {
-            cycleName: this.state.cycleName,
-            cycleDistance: this.state.cycleDistance,
-            cycleTime: this.state.cycleTime
+            cycleName: this.state.cycleName[0],
+            cycleDistance: this.state.cycleDistance[0],
+            cycleTime: this.state.cycleTime[0]
     })
     .then(response => console.log(response));
 }
 
-        
-
     render() {
         return (<div >
-            <RecordCard onChange={this.handleChange} submiter={this.submitRun} typeOfExercise="run"></RecordCard>
-            <RecordCard onChange={this.handleChange} submiter={this.submitCycle} typeOfExercise="cycle"></RecordCard>
+            <RecordCard onChange={this.handleChange} handleSubmit={this.submitRun} typeOfExercise="run"></RecordCard>
+            <RecordCard onChange={this.handleChange} handleSubmit={this.submitCycle} typeOfExercise="cycle"></RecordCard>
         </div>
         );
     }

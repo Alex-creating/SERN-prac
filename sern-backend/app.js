@@ -6,7 +6,7 @@ const runController = require("./routes/runController.js");
 const cycleController = require("./routes/cycleController.js");
 
 app.use(require("express").json());
-app.use(cors({origin: "http://localhost:8081"}));
+app.use(cors());
 
 app.use("/", runController);
 app.use("/", cycleController);

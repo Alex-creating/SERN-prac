@@ -1,14 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
 import Frontpage from "./page/Frontpage.js";
-import Header from "./components/Header.js";
+import ShowAllExercises from "./page/ShowAllExercises.js";
+import {
+  BrowserRouter as Router,
+  Route,
+  withRouter,
+  Switch
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <Frontpage typeOfExercise="run"></Frontpage>
-    </div>
+    <Router>
+      <Route exact path ="/" component={Frontpage}/>
+      <Route exact path ="/seeExercise" component={ShowAllExercises}/>
+    </Router>
   );
 }
 
